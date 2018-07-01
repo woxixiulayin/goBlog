@@ -26,13 +26,15 @@ func main() {
     // }
     //
 
-    db := model.DB()
+    model.DB()
 
-    db.Create(&model.User{
-        Name: "main",
-        Password: "asdddd",
-        Info: "is root",
-    })
+    // db := model.DB()
+
+    // db.Create(&model.User{
+    //     Name: "main",
+    //     Password: "asdddd",
+    //     Info: "is root",
+    // })
 
     e.GET("/", func(c echo.Context) error {
         return c.String(http.StatusOK, "Hello world \n")

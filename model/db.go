@@ -27,6 +27,9 @@ var conn = dbConnection {
 // 存储表结构的数组，用于创建表
 var dbTables = []interface {} {
     &User{},
+    &Post{},
+    &Comment{},
+    &Tag{},
 }
 
 func DB() *gorm.DB {
@@ -97,7 +100,7 @@ func (db *mydb) createTables(tables []interface{}) {
 
     for _, table := range tables {
         if db.HasTable(table) == false {
-            log.Debugf("create table %t \n", table)
+            log.Debugf("table %T dose not exists, create it \n", table)
             db.CreateTable(table)
             } else {
                 log.Debugf("%T table has created \n", table)
