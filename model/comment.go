@@ -8,6 +8,6 @@ type Comment struct {
 	gorm.Model
 
     Content string `gorm:"type:text"`
-    UserId int `gorm:"index"`
-    PostId int `gorm:"index"`
+    UserId uint
+    PostId uint
 }
