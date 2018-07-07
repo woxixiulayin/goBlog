@@ -18,7 +18,7 @@ type Post struct {
 
 func (p *Post) GetPostById(postId uint) (*Post, error) {
     post := &Post{}
-    if err := DB().Where("id = ?", postId).Find(post).Error; err != nil {
+    if err := DB().Where("id = ?", postId).First(post).Error; err != nil {
         log.Debugf("get post by id error: %v", err)
         return nil, err
     }
