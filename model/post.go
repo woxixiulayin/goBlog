@@ -37,7 +37,7 @@ func (p *Post) GetPostsByUserId(userId uint, page int, size int) (*[]Post, error
     return &posts, nil
 }
 
-func (p *Post) AddPost(title string, content string, userId uint, tags []Tag) (*Post, error){
+func (p *Post) CreatePost(title string, content string, userId uint, tags []Tag) (*Post, error){
     tx := DB().Begin()
 
     post := &Post{

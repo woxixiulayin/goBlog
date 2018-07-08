@@ -63,7 +63,6 @@ func DB() *gorm.DB {
 
         _db := &mydb{db}
         _db.createTables(dbTables)
-
     }
     
     // 创建
@@ -75,7 +74,12 @@ func newDB(conn dbConnection) (*gorm.DB, error) {
     sqlConnection := conn.UserName + ":" + conn.Pwd + "@tcp(" + conn.Host + ":" + conn.Port + ")/" + conn.Name + "?charset=utf8mb4&parseTime=True&loc=Local"
     
     db, err := gorm.Open("mysql", sqlConnection)
-    
+    db.Set("gorm:table_options", "ENGINE=InnoDB CHARSET=utf8mb4")
+
+    // for _, table := range dbTables {
+    //     db.AutoMigrate(table)
+    // }
+
     if err != nil {
         if err != nil {
             log.Debugf("newDB error")
@@ -101,7 +105,8 @@ func (db *mydb) createTables(tables []interface{}) {
     for _, table := range tables {
         if db.HasTable(table) == false {
             log.Debugf("table %T dose not exists, create it \n", table)
-            db.CreateTable(table)
+            // 设置默认编码格式为utf8
+            db.Set("gorm:table_options", "ENGINE=InnoDB DEFAULT CHARSET=utf8").CreateTable(table)
             } else {
                 log.Debugf("%T table has created \n", table)
         }

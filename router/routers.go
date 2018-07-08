@@ -13,6 +13,7 @@ func RegisterRouters(e *echo.Echo) error {
     {
         post.GET("", GetPostsByUserId)
         post.GET("/:postId", GetPostsById)
+        post.POST("/create", CreatePost)
     }
 
     return nil
