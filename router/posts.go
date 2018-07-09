@@ -10,12 +10,16 @@ import (
     "goBlog/modules/log"
 )
 
-var Post model.Post
-
 type BingedCreatePostParam struct {
     Title string `form:"title"`
     Content string `form:"content"`
     Jsontags string `form:"tags"`
+}
+
+type BingedUpdatePostParam struct {
+    Title string `form:"title"`
+    Content string `form:"content"`
+    Id string `form:"id"`
 }
 
 // posts/:postId
@@ -29,6 +33,7 @@ func GetPostsById(c echo.Context) error {
         panic(err)
     }
 
+    var Post model.Post
     post, err := Post.GetPostById(uint(postId))
     if err != nil {
         switch err {
@@ -72,6 +77,7 @@ func GetPostsByUserId(c echo.Context) error {
 
     log.Debugf("userid: %v, page: %v, page_size: %v", userId, page, pageSize)
 
+    var Post model.Post
     posts, err := Post.GetPostsByUserId(uint(userId), page, pageSize)
     if err != nil {
         panic(err)
@@ -88,16 +94,6 @@ func GetPostsByUserId(c echo.Context) error {
 // method： Post， 参数在form中
 func CreatePost(c echo.Context) error {
     result := make(map[string]interface{})
-
-    // title := c.FormValue("title")
-    // content := c.FormValue("content")
-    // jsonTags := c.FormValue("tags")
-
-    // log.Debugf("title is %v, content is %v, jsonTags is %v", title, content, jsonTags)
-
-    // var tags []string
-    // json.Unmarshal([]byte(jsonTags), &tags)
-    // log.Debugf("postCreate get tags: %v", tags)
 
     post := &BingedCreatePostParam{}
     if err:= c.Bind(post); err != nil {
@@ -131,6 +127,8 @@ func CreatePost(c echo.Context) error {
         }
     }
 
+    var Post model.Post
+
     if _, err := Post.CreatePost(post.Title, post.Content, userId, tags); err != nil {
         log.Debugf("postCreate error $v", err)
         result["code"] = http.StatusInternalServerError
@@ -144,6 +142,50 @@ func CreatePost(c echo.Context) error {
     return nil
 }
 
-// func postUpdate(c echo.Context) error {
+func UpdatePost(c echo.Context) error {
+    result := make(map[string]interface{})
+    post := model.Post{}
 
-// }
+    postParam := BingedUpdatePostParam{}
+
+    if err := c.Bind(&postParam); err != nil {
+        log.Debugf("[UpdatePost]bind data error: %v", err)
+        result["code"] = http.StatusBadRequest
+        c.JSON(http.StatusOK, result)
+        return err
+    }
+
+    postId, err := strconv.ParseUint(postParam.Id, 10, 64)
+    if err != nil {
+        RequestResult(c, http.StatusBadRequest, nil, "wrong id")
+        return err
+    }
+
+    if _, err := post.GetPostById(uint(postId)); err != nil {
+        RequestResult(c, http.StatusNotFound, nil, "post not found")
+        return err
+    }
+
+    post.ID = uint(postId)
+
+    if err := model.DB().Model(&post).Update(map[string]interface{}{
+        "Title": postParam.Title,
+        "Content": postParam.Content,
+    }).Error; err != nil {
+        log.Debugf("[UpdatePost] update error: %v", err)
+        var code int
+        switch err {
+        case gorm.ErrRecordNotFound:
+            code = http.StatusNotFound
+        default:
+            code = http.StatusInternalServerError
+        }
+        RequestResult(c, code, nil, "update post error")
+        return err
+    }
+
+    RequestResult(c, http.StatusOK, nil, "ok")
+
+    return nil
+
+}
