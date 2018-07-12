@@ -55,3 +55,23 @@ func (p *Post) CreatePost(title string, content string, userId uint, tags []Tag)
 
     return post, nil
 }
+
+func (p *Post) UpdatePost(postParam map[string]interface{}) (*Post, error) {
+
+    post := &Post{}
+
+    log.Debugf("Post UpdatePost with %v", postParam)
+    // find
+    if err := DB().First(post, postParam["id"]).Error; err != nil {
+        log.Debugf("Post UpdatePost error1: %v", err)
+        return nil, err
+    }
+
+    delete(postParam, "Id")
+    if err := DB().Model(post).Update(postParam).Error; err != nil {
+        log.Debugf("Post UpdatePost error2: %v", err)
+        return nil, err
+    }
+
+    return post, nil
+}
