@@ -1,0 +1,18 @@
+# ninja log v5
+2	15	1531438865	ReactTemplate.cmi	996d183e8eaec79f
+0	30	1531438865	src/Index.mlast	34acf31826467cbe
+0	30	1531438865	src/Component1.mlast	e44f982bf1e4e9a6
+1	30	1531438865	src/Component2.mlast	6d42203b212a7519
+30	35	1531438865	src/Index.mlast.d	6c5ff049269f1260
+30	35	1531438865	src/Component1.mlast.d	4469e1649c14bbc2
+30	35	1531438865	src/Component2.mlast.d	bb7c3e5fcd835976
+0	21	1531438865	src/Component1-ReactTemplate.cmj	43a3b4c05c3235ee
+0	21	1531438865	/Users/Jackson/go/src/goBlog/assets/src/Component1.bs.js	43a3b4c05c3235ee
+0	21	1531438865	src/Component1-ReactTemplate.cmi	43a3b4c05c3235ee
+0	24	1531438865	src/Component2-ReactTemplate.cmj	b5c6e97fe0daec46
+0	24	1531438865	/Users/Jackson/go/src/goBlog/assets/src/Component2.bs.js	b5c6e97fe0daec46
+0	24	1531438865	src/Component2-ReactTemplate.cmi	b5c6e97fe0daec46
+24	38	1531438865	src/Index-ReactTemplate.cmj	9fbfe6fee1d18c7b
+24	38	1531438865	/Users/Jackson/go/src/goBlog/assets/src/Index.bs.js	9fbfe6fee1d18c7b
+24	38	1531438865	src/Index-ReactTemplate.cmi	9fbfe6fee1d18c7b
+0	10	1531438924	ReactTemplate.cmi	996d183e8eaec79f
