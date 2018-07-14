@@ -1,1 +1,0 @@
-src/Index-ReactTemplate.cmj : src/modules/App/App-ReactTemplate.cmj

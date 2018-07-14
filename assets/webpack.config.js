@@ -14,7 +14,7 @@ const plugins = [
 ]
 
 const entry = {
-    home: './src/index.bs.js'
+    home: './src/index.jsx'
 }
 
 module.exports = {
@@ -26,8 +26,13 @@ module.exports = {
     filename: 'index.[hash].js',
   },
   resolve: {
+      modules: [
+          resolve('./node_modules')
+      ],
+      extensions: ['.js', '.jsx'],
       alias: {
-          css: resolve("./css")
+          css: resolve("./css"),
+          src: resolve('./src'),
       }
   },
   module: {
@@ -43,7 +48,11 @@ module.exports = {
               }
             }
           ]
-        }
+        },
+        { test: /\.js|jsx$/,
+          use: [
+            { loader: "babel-loader"}
+        ]}
       ]
   },
   plugins,
