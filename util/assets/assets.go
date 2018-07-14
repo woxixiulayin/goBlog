@@ -8,12 +8,28 @@ import (
 
 var jsPath = "./assets/assets.json"
 
-// 从assets.json中获取js地址
-func GetJsFiles() map[string]string {
+// 对应assets.home.js，
+type JsFile struct {
+    Js string `json:"js"`
+}
 
-    // js文件解析后的数据
-    var assetsMap map[string]interface
-    var jsFiles map[string]string
+// 使用tag指明键值对应的jsonkey
+// struct中的键值要大写，外部才能使用
+type AssetsMapType struct {
+    Home JsFile `json:"home"`
+}
+
+type JsFiles struct {
+    Home string
+}
+
+// 从assets.json中获取js地址
+func GetJsFiles() JsFiles {
+
+    // json文件格式如下
+    // {\"home\":{\"js\":\"/Users/Jackson/go/src/goBlog/assets/build/index.427672d296ac31fd9608.js\"}}"}
+    var assetsMap AssetsMapType
+    var jsFiles JsFiles
 
     data, err := ioutil.ReadFile(jsPath)
 
@@ -21,13 +37,15 @@ func GetJsFiles() map[string]string {
 
     if err != nil {
        log.Debugf("read file %v error: %v", jsPath, err) 
-       return nil
+       return jsFiles
     }
     
     if err := json.Unmarshal(data, &assetsMap); err != nil {
         log.Debugf("Unmarshal file %v error: %v", jsPath, err) 
-        return nil
+        return jsFiles
     }
 
-    return assetsMap
+    jsFiles.Home = assetsMap.Home.Js
+
+    return jsFiles
 }

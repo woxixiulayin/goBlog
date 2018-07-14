@@ -18,7 +18,7 @@ module.exports = {
   mode: isProd ? 'production' : 'development',
   output: {
     path: outputDir,
-    publicPath: outputDir,
+    publicPath: '/assets/build',
     filename: 'index.[hash].js',
   },
   plugins,
