@@ -12,9 +12,12 @@ var Bottom = 0;
 
 var Header = 0;
 
+var Router = 0;
+
 exports.Index = Index;
 exports.App = App;
 exports.Body = Body;
 exports.Bottom = Bottom;
 exports.Header = Header;
+exports.Router = Router;
 /* No side effect */
