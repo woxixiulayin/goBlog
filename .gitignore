@@ -2,3 +2,4 @@ node_modules
 .cache
 .vscode
 assets/dist
+assets/lib/bs/src
