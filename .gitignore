@@ -1,6 +1,7 @@
 node_modules
 .cache
 .vscode
+*.bs.js
 ./lib/bs/*
 assets/dist
 assets/lib/bs/src
