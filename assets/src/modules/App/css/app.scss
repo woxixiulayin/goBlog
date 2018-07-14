@@ -1,0 +1,9 @@
+@import './header.scss';
+@import './body.scss';
+@import './bottom.scss';
+
+#app {
+    height: 100%;
+    width: 100%;
+    color: var(---text-color);
+}

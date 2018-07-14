@@ -11,4 +11,6 @@ S /Users/Jackson/go/src/goBlog/assets/node_modules/reason-react/lib/ocaml
 B /Users/Jackson/go/src/goBlog/assets/node_modules/reason-react/lib/ocaml
 S src
 B lib/bs/src
+S src/modules/App
+B lib/bs/src/modules/App
 ####BSB GENERATED: NO EDIT}

@@ -6,9 +6,10 @@ import (
     assets "goBlog/util/assets"
 )
 
-var jsFiles = assets.GetJsFiles()
 
 func HomeHandler(c echo.Context) error {
+
+    jsFiles := assets.GetJsFiles()
 
     return c.Render(http.StatusOK, "home", map[string]interface{} {
         "name": "哈哈哈",

@@ -4,11 +4,17 @@
 
 var Index = 0;
 
-var Component1 = 0;
+var App = 0;
 
-var Component2 = 0;
+var Body = 0;
+
+var Bottom = 0;
+
+var Header = 0;
 
 exports.Index = Index;
-exports.Component1 = Component1;
-exports.Component2 = Component2;
+exports.App = App;
+exports.Body = Body;
+exports.Bottom = Bottom;
+exports.Header = Header;
 /* No side effect */

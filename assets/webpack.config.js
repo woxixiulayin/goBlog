@@ -1,8 +1,12 @@
 const path = require('path');
 const Clean = require('clean-webpack-plugin');
 const AssetsPlugin = require('assets-webpack-plugin');
-const outputDir = path.join(__dirname, "build/");
+const outputDir = path.join(__dirname, "dist/");
 const isProd = process.env.NODE_ENV === 'production';
+
+function resolve(dir) {
+    return path.join(__dirname, './', dir)
+}
 
 const plugins = [
     new Clean(['dist'], { root: './'}),
@@ -18,8 +22,29 @@ module.exports = {
   mode: isProd ? 'production' : 'development',
   output: {
     path: outputDir,
-    publicPath: '/assets/build',
+    publicPath: '/assets/dist',
     filename: 'index.[hash].js',
+  },
+  resolve: {
+      alias: {
+          css: resolve("./css")
+      }
+  },
+  module: {
+      rules: [
+        { test:/\.scss$/,
+        use: [
+            { loader: 'style-loader' },
+            { loader: 'css-loader' },
+            {
+              loader: 'sass-loader',
+              options: {
+                modules: true
+              }
+            }
+          ]
+        }
+      ]
   },
   plugins,
 };

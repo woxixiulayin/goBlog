@@ -1,3 +1,3 @@
-ReactDOMRe.renderToElementWithId(<Component1 message="Hello!" />, "index1");
+[%bs.raw {|require("css/index.scss")|}];
 
-ReactDOMRe.renderToElementWithId(<Component2 greeting="Hello!" />, "index2");
+ReactDOMRe.renderToElementWithId(<App />, "app")
