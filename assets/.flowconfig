@@ -1,0 +1,17 @@
+[ignore]
+.*/__tests__/.*
+.*/*.json
+./dist
+./build/.*
+
+[include]
+./node_modules/
+./src/
+
+[libs]
+
+[options]
+;# 路径重定义，与webpack里定义的alias一致
+# 参考 https://zhenyong.github.io/flowtype/docs/advanced-configuration.html#_
+
+module.name_mapper='^src/\([-a-zA-Z0-9_/]+\)$' -> '<PROJECT_ROOT>/src/\1'

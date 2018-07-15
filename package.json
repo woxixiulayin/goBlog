@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "rxjs": "^6.2.2"
+  },
+  "devDependencies": {
+    "flow-bin": "^0.76.0"
+  }
+}
