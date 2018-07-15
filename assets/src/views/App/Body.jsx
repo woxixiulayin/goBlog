@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import Module, { bindRxObservable } from 'src/lib/Module'
+import { EntityModule, bindRxObservable } from 'src/lib/Module'
 
-const todos = new Module({
+const todos = new EntityModule({
     state: {
     }
 })

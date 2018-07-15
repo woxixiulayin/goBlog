@@ -39,7 +39,15 @@ const deleteEntities = (state: StateType, entityIds: Array<number> | number): St
         return state
     }, {...state})
 }
-    const bindRxObservable = (
+
+/**
+ * 用法，从todos.$$state中计算法需要的数据作为todo Prop传给Todos组件
+   @bindRxObservable(todos.$$state, {
+        todo: (state, ownProps) => state[ownProps.id] || {}
+    })
+    class Todos extends Component {
+ */
+const bindRxObservable = (
         $$data: Rx.BehaviorSubject,
         mapState: {[stateKey: string]: Function}
     ) => WrappedComponent => {
@@ -99,12 +107,7 @@ const deleteEntities = (state: StateType, entityIds: Array<number> | number): St
     }
 }
 
-class Module {
-
-    // constructor({
-    //     state = {}
-    // }) {
-    // }
+class BaseModule {
     state: StateType
     $$state: Rx.BehaviorSubject
 
@@ -124,7 +127,14 @@ class Module {
         this.state = newState
         this.$$state.next(newState)
     }
-    
+}
+
+class EntityModule extends BaseModule {
+
+    // constructor({
+    //     state = {}
+    // }) {
+    // 
     set(entities: Array<EntityType>) {
         this._updateState(setEntities(entities))
     }
@@ -138,7 +148,8 @@ class Module {
     }
 }
 
-export default Module
 export {
+    BaseModule,
+    EntityModule,
     bindRxObservable
 }

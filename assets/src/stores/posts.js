@@ -1,8 +1,8 @@
 /**@flow */
 import Rx from 'rxjs'
-import Module from 'src/lib/Module'
+import { EntityModule } from 'src/lib/Module'
 
-const posts = new Module({
+const posts = new EntityModule({
     state: {}
 })
 
