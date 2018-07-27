@@ -4,6 +4,7 @@ import (
     _ "github.com/go-sql-driver/mysql"
     "github.com/jinzhu/gorm"
     "goBlog/modules/log"
+    "time"
 )
 
 var db *gorm.DB
@@ -30,6 +31,13 @@ var dbTables = []interface {} {
     &Post{},
     &Comment{},
     &Tag{},
+}
+
+type DBModel struct {
+	ID        uint `gorm:"primary_key" json:"id"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"update_at"`
+	DeletedAt *time.Time `sql:"index" json:"deleted_at"`
 }
 
 func DB() *gorm.DB {

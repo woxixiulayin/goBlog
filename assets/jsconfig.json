@@ -5,8 +5,17 @@
        "allowSyntheticDefaultImports": true,
        "jsx": "react",
        "module": "commonjs",
-       "baseUrl": "src",
+       "baseUrl": "./",
+       "sourceRoot": "src",
+       "paths": {
+        "src/*": ["src/*"]
+    }
    },
    "jsx": "react",
    "modules": "commonjs",
+   "exclude": [
+    "node_modules",
+    "build",
+    "dist"
+  ]
 }

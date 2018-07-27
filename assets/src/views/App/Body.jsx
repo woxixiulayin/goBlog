@@ -1,20 +1,11 @@
 import React, { Component } from 'react'
-import { EntityModule, bindRxObservable } from 'src/lib/Module'
 
-const todos = new EntityModule({
-    state: {
-    }
-})
-
-window.todos = todos
-@bindRxObservable(todos.$$state, {
-    todo: (state, ownProps) => state[ownProps.id] || {}
-})
 class Todos extends Component {
     render() {
-        const { todo = {} } = this.props
+        const { post = {} } = this.props
+        console.log('rerender', post)
         return <div>
-        {todo.title}
+        <div>{''}</div>
         </div>
     }
 }

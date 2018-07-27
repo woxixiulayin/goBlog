@@ -2,9 +2,40 @@
 # yarn lockfile v1
 
 
+axios@^0.18.0:
+  version "0.18.0"
+  resolved "http://registry.npm.taobao.org/axios/download/axios-0.18.0.tgz#32d53e4851efdc0a11993b6cd000789d70c05102"
+  dependencies:
+    follow-redirects "^1.3.0"
+    is-buffer "^1.1.5"
+
+debug@^3.1.0:
+  version "3.1.0"
+  resolved "http://registry.npm.taobao.org/debug/download/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
+  dependencies:
+    ms "2.0.0"
+
 flow-bin@^0.76.0:
   version "0.76.0"
   resolved "http://registry.npm.taobao.org/flow-bin/download/flow-bin-0.76.0.tgz#eb00036991c3abc106743fcbc7ee321f02aa4faa"
+
+follow-redirects@^1.3.0:
+  version "1.5.1"
+  resolved "http://registry.npm.taobao.org/follow-redirects/download/follow-redirects-1.5.1.tgz#67a8f14f5a1f67f962c2c46469c79eaec0a90291"
+  dependencies:
+    debug "^3.1.0"
+
+is-buffer@^1.1.5:
+  version "1.1.6"
+  resolved "http://registry.npm.taobao.org/is-buffer/download/is-buffer-1.1.6.tgz#efaa2ea9daa0d7ab2ea13a97b2b8ad51fefbe8be"
+
+ms@2.0.0:
+  version "2.0.0"
+  resolved "http://registry.npm.taobao.org/ms/download/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
+
+qs@^6.5.2:
+  version "6.5.2"
+  resolved "http://registry.npm.taobao.org/qs/download/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
 
 rxjs@^6.2.2:
   version "6.2.2"

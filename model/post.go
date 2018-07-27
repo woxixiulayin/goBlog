@@ -1,19 +1,17 @@
 package model
 
 import (
-    "github.com/jinzhu/gorm"
     "goBlog/modules/log"
 )
 
 type Post struct {
-	gorm.Model
-
-    Title string
-    Content string `gorm:"type:text"`
-    Pv int
-    UserId uint
-    Tags []Tag `gorm:"many2many:post_tags;"` // 多对多关系
-    Comment []Comment // 包含多个comment
+    DBModel
+    Title     string    `json:"title"`
+    Content   string  `gorm:"type:text" json:"content"`
+    Pv        int      `json:"pv"`
+    UserId    uint     `json:"userId"`
+    Tags      []Tag     `gorm:"many2many:post_tags;" json:"tags"` // 多对多关系
+    Comments   []Comment  `json:"comments"`// 包含多个comment
 }
 
 func (p *Post) GetPostById(postId uint) (*Post, error) {

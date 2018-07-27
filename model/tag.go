@@ -1,12 +1,11 @@
 package model
 
 import (
-    "github.com/jinzhu/gorm"
     "goBlog/modules/log"
 )
 
 type Tag struct {
-	gorm.Model
+    DBModel
 
     Name string `gorm:"unique"`
 }

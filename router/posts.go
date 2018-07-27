@@ -46,10 +46,10 @@ func GetPostsById(c echo.Context) error {
             result["code"] = http.StatusInternalServerError
         }
 
-        result["post"] = nil
+        result["data"] = nil
     } else {
         result["code"] = http.StatusOK
-        result["post"] = post
+        result["data"] = post
     }
 
     log.Debugf("GetPostsById result is %v", result)
@@ -73,6 +73,7 @@ func GetPostsByUserId(c echo.Context) error {
     }
 
     pageSize, err := strconv.Atoi(c.QueryParam("page_size"))
+    log.Debugf("page size is %v", pageSize)
     if err != nil {
         panic(err)
     }
@@ -87,7 +88,7 @@ func GetPostsByUserId(c echo.Context) error {
 
     c.JSON(http.StatusOK, map[string]interface{} {
         "code": http.StatusOK,
-        "posts": posts,
+        "data": posts,
     })
 
     return nil
