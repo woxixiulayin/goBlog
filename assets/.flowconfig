@@ -6,7 +6,6 @@
 
 [include]
 node_modules
-./src/
 
 [libs]
 

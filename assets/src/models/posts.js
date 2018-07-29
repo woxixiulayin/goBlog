@@ -1,6 +1,7 @@
 // @flow
 import ajax from 'src/lib/ajax'
 import entityUtils from 'src/lib/entityUtils'
+import { createModel } from '@rematch/core'
 import * as postsOperations from 'src/ajaxOperations/posts'
 
 export type typePostEntity = {
@@ -20,9 +21,7 @@ type typeState = {
     postsById: typePostsById
 }
 
-const posts: {
-    state: typeState
-} = {
+const posts = createModel({
     state: {
         postsById: {}
     },
@@ -53,6 +52,6 @@ const posts: {
             return posts
         }
     })
-}
+})
 
 export default posts

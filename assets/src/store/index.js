@@ -6,4 +6,5 @@ const store = init({
 })
 
 window.store = store
+
 export default store

@@ -2,7 +2,8 @@
   "name": "my-work",
   "version": "0.1.0",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test-w": "jest --watch",
+    "test-u": "jest --updateSnapshot",
     "watch": "webpack -w",
     "webpack:production": "NODE_ENV=production webpack"
   },
@@ -11,10 +12,12 @@
   "dependencies": {
     "@rematch/core": "next",
     "axios": "^0.18.0",
+    "babel-jest": "^23.4.2",
     "babel-plugin-transform-runtime": "^6.23.0",
     "qs": "^6.5.2",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "rxjs": "^6.2.2"
   },
   "devDependencies": {
     "assets-webpack-plugin": "^3.8.4",
@@ -27,6 +30,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^1.0.0",
+    "jest": "^23.4.2",
     "node-sass": "^4.9.2",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
