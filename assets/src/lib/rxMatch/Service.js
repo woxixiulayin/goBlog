@@ -1,5 +1,5 @@
 // @flow
-import { Observable } from 'rxjs'
+import { BehaviorSubject } from 'rxjs'
 
 class Service <A> {
     // 内部保存的数据
@@ -11,7 +11,8 @@ class Service <A> {
         state: A
     }) {
         this.state = {}
-        this.state$ = new Observable()
+        // 使用BehaviorSubject，使得stae$可以被各处订阅
+        this.state$ = new BehaviorSubject()
         this._updateState(state)
     }
 

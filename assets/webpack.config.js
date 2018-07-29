@@ -3,6 +3,7 @@ const Clean = require('clean-webpack-plugin');
 const AssetsPlugin = require('assets-webpack-plugin');
 const outputDir = path.join(__dirname, "dist/");
 const isProd = process.env.NODE_ENV === 'production';
+const webpack = require('webpack');
 
 function resolve(dir) {
     return path.join(__dirname, './', dir)
@@ -11,6 +12,10 @@ function resolve(dir) {
 const plugins = [
     new Clean(['dist'], { root: './'}),
     new AssetsPlugin({ filename: 'assets.json' }),
+    new webpack.ProvidePlugin({
+        React: 'react',
+        log: 'src/lib/log',
+    }),
 ]
 
 const entry = {

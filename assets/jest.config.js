@@ -14,5 +14,8 @@ module.exports = {
     "moduleNameMapper": {
         "^css(.+)$": "<rootDir>/css$1",
         "src(.+)$": "<rootDir>/src$1"
-    }
+    },
+    "setupFiles": [
+        "<rootDir>/__mocks__/setUp.js"
+    ]
 }

@@ -1,10 +1,10 @@
 //  @flow
 import Service from './Service'
-import { combineLatest, BehaviorSubject } from 'rxjs'
+import { combineLatest, BehaviorSubject, of } from 'rxjs'
 import assert from 'src/lib/assert'
 
 type typeServices = {
-    [name: string]: Service
+    [name: string]: Service<any>
 }
 
 type typeInitParam = {
@@ -15,45 +15,64 @@ export default function createRxStore({
     services,
 }: typeInitParam = {
     services: {}
-}): {
-    getState: Function,
-    subscribe: Function,
-    dispatch: Object,
-} {
+}) {
     let state = null
     const state$ = new BehaviorSubject()
-    const serviceList = Object.values(services)
-    
-    const dispatch = Object.keys(services).reduce((dispatch, item) => {
-        assert(typeof dispatch === 'undefined', `service name '${item}' has already been used`)
+    const serviceState$List = Object.values(services).map(service => service.state$)
+    const serviceKeys = Object.keys(services)
 
-        const service = services[item]
+    log('serviceList is', serviceState$List, '\nserviceKeys is', serviceKeys)
+    const dispatch = serviceKeys.reduce((dispatch, serviceName) => {
+        assert(typeof dispatch[serviceName] === 'undefined', `service name '${serviceName}' has already been used`)
 
-        dispatch[item] = Object.getOwnPropertyNames(service).reduce((pureService, method) => {
-            pureService[method] = service[method].bind(service)
+        const service = services[serviceName]
+
+        dispatch[serviceName] = Object.getOwnPropertyNames(service).reduce((pureService, method) => {
+
+            if (typeof service[method] !== 'function') {
+                return pureService
+            }
+
+            log('pureService is {', pureService, `} \nmethod is ${method}`)
+
+            pureService[method] = function (...args) {
+                log(`dispatch service [${serviceName}] width param`, ...args)
+                return service[method].call(service, ...args)
+            }
+
             return pureService
-        })
+        }, {})
 
         return dispatch
     }, {})
-    
+
+    const initService = of('@@INIT')
 
     // 订阅所有services
-    combineLatest(...serviceList)
-    .subscribe(newState => {
+    combineLatest(...serviceState$List, initService)
+    .subscribe(stateLists => {
+        log('new state Lists is ', stateLists)
+
+        const newState = serviceKeys.reduce((state, key, index) => {
+            state[key] = stateLists[index]
+            return state
+        }, {})
+
         state = newState
+        // 触发订阅更新
+        log('new state$ is ', newState)
         state$.next(state)
     })
 
+    
 
-    const getState = (...args: any): any => {
+    const getState = (): any => {
         return state
     }
 
     const subscribe = (...args: any): Function => {
         return state$.subscribe(...args)
     }
-
 
     return {
         getState,
