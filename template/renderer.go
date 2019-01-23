@@ -11,8 +11,6 @@ type TemplateRender struct {
     templates *template.Template
 }
 
-var renderer *TemplateRender
-
 // 返回一个模板文档
 func (t *TemplateRender) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
     if viewContext, isMap := data.(map[string]interface{}); isMap {
@@ -23,11 +21,9 @@ func (t *TemplateRender) Render(w io.Writer, name string, data interface{}, c ec
 }
 
 func Renderer() *TemplateRender {
-    if renderer == nil {
-        renderer = &TemplateRender{
+    renderer := &TemplateRender {
             templates: template.Must(template.ParseGlob("template/html/*.html")),
         }
-    }
     return renderer
 }
 

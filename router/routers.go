@@ -6,8 +6,10 @@ import (
 )
 
 func RegisterRouters(e *echo.Echo) error {
+    e.GET("/login", LoginHandler)
+    e.POST("/login", LoginPostHandler)
     // home
-    e.GET("/", HomeHandler)
+    e.GET("/home", HomeHandler)
 
     // post
     post := e.Group("/posts")

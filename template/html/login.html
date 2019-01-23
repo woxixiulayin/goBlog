@@ -1,0 +1,62 @@
+{{ define "login" }}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>登录</title>
+    <style>
+        .login-container {
+            margin-top: 50%;
+            margin-left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            border: 1px solid #666;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .login-item {
+            margin-bottom: 8px;
+        }
+        #login {
+            font-size: 12px;
+            width: 100px;
+            height: 24px;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <section class="login-container">
+        <div class="login-item">
+            名字：<input type="text" name="name" />
+        </div>
+        <div class="login-item">
+            密码：<input type="password" name="password"/>
+        </div>
+        <div class="login-item">
+            <button id="login">登录</button>
+        </div>
+    </section>
+    <script>
+        const btn = document.querySelector('#login')
+        btn.onclick = function() {
+            fetch('/login', {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: document.querySelector('input[name=name]').value,
+                password: document.querySelector('input[name=password]').value
+                })
+                
+            })
+        }
+    </script>
+</body>
+</html>
+{{ end }}
